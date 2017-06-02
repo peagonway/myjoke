@@ -1,20 +1,19 @@
 <template>
-  <div>
-    <mt-header title="资讯">
-      <div slot="left">
-        <mt-button icon="back">返回</mt-button>
-      </div>
+  <div class="hello">
+    <mt-header :title="mainTit" fixed >
+    <router-link to="/" slot="left">
+      <mt-button icon="back">back</mt-button>
+    </router-link>
     </mt-header>
-
+    <div class="top-bug"></div>
     <router-view></router-view>
-
     <div class="bottom-bug"></div>
     <div class="bottom-nav-wrap">
-      <ul class="bottom-nav">
-        <li><router-link to="news">资讯</router-link></li>
-        <li><router-link to="search">玩家</router-link></li>
-        <li>英雄</li>
-        <li>视频</li>
+      <ul class="bottom-nav" >
+        <li><router-link to="joke">笑话</router-link></li>
+        <li><router-link to="pic">图片</router-link></li>
+        <li><router-link to="gif">动画</router-link></li>
+        <li><router-link to="vedio">视频</router-link></li>
       </ul>
     </div>
   </div>
@@ -22,21 +21,28 @@
 
 <script>
 export default {
+  name: 'hello',
   data () {
     return {
+      msg: 'Welcome to Your Vue.js App',
+      state: this.$store.state
+    }
+  },
+  created () {
+    //console.log(this.$store.state.pageTab)
+  },
+  computed: {
+    mainTit (){
+      return this.$store.state.pageTit
     }
   },
   methods: {
-    loadTop () {
-      console.log('loadTop')
-    },
-    loadBottom () {
-      console.log('loadBottom')
-    },
-    allLoaded () {
-      console.log('all')
+    changTit: function(e){
+       if (e.target.tagName == "A"){
+        this.mainTit = e.target.innerHTML
+       }
+       
     }
-
   }
 }
 </script>
